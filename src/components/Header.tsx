@@ -42,7 +42,7 @@ const mockPDFs: PDFOption[] = [
   {
     id: "pdf4",
     name: "My PDF Document", // Change this to your PDF name
-    url: "https://drive.google.com/uc?export=download&id=YOUR_FILE_ID_HERE", // Replace YOUR_FILE_ID_HERE with your actual file ID
+    url: "https://drive.google.com/uc?export=download&id=1Lo_Ce9bGRlCE3yAbLsXEUG_MUpY9wvh9", // Replaced with your actual file ID
   },
 ];
 
