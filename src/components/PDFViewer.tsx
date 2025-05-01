@@ -52,8 +52,16 @@ export const PDFViewer = ({ pdfUrl, pdfId, pdfName }: PDFViewerProps) => {
       setLoading(true);
       
       try {
+        // Handle Google Drive links specially
+        const isGoogleDriveLink = pdfUrl.includes('drive.google.com');
+        
         const response = await axios.get(pdfUrl, {
           responseType: "arraybuffer",
+          // For Google Drive links, we might need additional headers to bypass limitations
+          headers: isGoogleDriveLink ? {
+            'Access-Control-Allow-Origin': '*',
+            'Content-Type': 'application/pdf',
+          } : {}
         });
         
         // Convert arraybuffer to base64
@@ -127,7 +135,7 @@ export const PDFViewer = ({ pdfUrl, pdfId, pdfName }: PDFViewerProps) => {
       <div className="flex items-center justify-center h-96">
         <div className="text-center">
           <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-news-primary border-r-transparent mb-4"></div>
-          <p>Loading PDF...</p>
+          <p>Loading PDF from Google Drive...</p>
         </div>
       </div>
     );

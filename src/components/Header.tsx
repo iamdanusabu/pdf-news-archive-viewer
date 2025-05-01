@@ -20,21 +20,23 @@ interface HeaderProps {
   selectedPDFId: string | null;
 }
 
+// Updated with Google Drive PDF links
+// Note: These are public Google Drive PDF links with direct download format
 const mockPDFs: PDFOption[] = [
   {
     id: "pdf1",
-    name: "Sample PDF 1",
-    url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+    name: "Google Drive PDF 1",
+    url: "https://drive.google.com/uc?export=download&id=1BqnJjgI5GdluiSXh7Ds8CDRRCz65biN5",
   },
   {
     id: "pdf2",
-    name: "Sample PDF 2",
-    url: "https://www.africau.edu/images/default/sample.pdf",
+    name: "Google Drive PDF 2",
+    url: "https://drive.google.com/uc?export=download&id=1pLHOdKD0-WM4kH-2KKpCkOIqcNk9YXg_",
   },
   {
     id: "pdf3",
     name: "Sample PDF 3",
-    url: "https://www.orimi.com/pdf-test.pdf",
+    url: "https://www.orimi.com/pdf-test.pdf", // Kept one regular URL as fallback
   },
 ];
 
