@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,14 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// News portal specific colors
+				news: {
+					primary: '#1a365d', // Deep navy blue
+					secondary: '#e53e3e', // Bright red
+					accent: '#3182ce', // Blue for links and highlights
+					light: '#f7fafc', // Very light gray/almost white
+					dark: '#2d3748', // Dark gray for text
 				}
 			},
 			borderRadius: {

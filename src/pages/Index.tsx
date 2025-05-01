@@ -1,12 +1,38 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+
+import { useState } from "react";
+import { Header } from "@/components/Header";
+import Footer from "@/components/Footer";
+import PDFViewer from "@/components/PDFViewer";
+
+interface PDFOption {
+  id: string;
+  name: string;
+  url: string;
+}
 
 const Index = () => {
+  const [selectedPDF, setSelectedPDF] = useState<PDFOption | null>(null);
+
+  const handleSelectPDF = (pdf: PDFOption) => {
+    setSelectedPDF(pdf);
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div className="flex flex-col min-h-screen">
+      <Header 
+        onSelectPDF={handleSelectPDF} 
+        selectedPDFId={selectedPDF?.id || null} 
+      />
+      
+      <main className="container mx-auto px-4 py-6 flex-grow">
+        <PDFViewer 
+          pdfUrl={selectedPDF?.url || null}
+          pdfId={selectedPDF?.id || null}
+          pdfName={selectedPDF?.name || null}
+        />
+      </main>
+      
+      <Footer />
     </div>
   );
 };
