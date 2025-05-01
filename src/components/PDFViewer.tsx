@@ -52,16 +52,24 @@ export const PDFViewer = ({ pdfUrl, pdfId, pdfName }: PDFViewerProps) => {
       setLoading(true);
       
       try {
-        // Handle Google Drive links specially
-        const isGoogleDriveLink = pdfUrl.includes('drive.google.com');
+        let finalUrl = pdfUrl;
         
-        const response = await axios.get(pdfUrl, {
-          responseType: "arraybuffer",
-          // For Google Drive links, we might need additional headers to bypass limitations
-          headers: isGoogleDriveLink ? {
-            'Access-Control-Allow-Origin': '*',
-            'Content-Type': 'application/pdf',
-          } : {}
+        // Handle Google Drive links using a CORS proxy
+        if (pdfUrl.includes('drive.google.com')) {
+          // Extract the file ID from the Google Drive URL
+          const fileIdMatch = pdfUrl.match(/id=([^&]+)/);
+          if (fileIdMatch && fileIdMatch[1]) {
+            const fileId = fileIdMatch[1];
+            // Use a CORS proxy service to bypass the CORS restrictions
+            finalUrl = `https://cors-anywhere.herokuapp.com/https://drive.google.com/uc?export=download&id=${fileId}`;
+            
+            // Alternatively, we could use a direct Google Drive viewer URL
+            // finalUrl = `https://drive.google.com/file/d/${fileId}/preview`;
+          }
+        }
+        
+        const response = await axios.get(finalUrl, {
+          responseType: "arraybuffer"
         });
         
         // Convert arraybuffer to base64
@@ -95,9 +103,29 @@ export const PDFViewer = ({ pdfUrl, pdfId, pdfName }: PDFViewerProps) => {
         console.error("Error fetching PDF:", error);
         toast({
           title: "Error Loading PDF",
-          description: "Could not load the selected PDF. Please try again.",
+          description: "Could not load the selected PDF. Please try another method.",
           variant: "destructive"
         });
+        
+        // If the CORS proxy fails, try to redirect to view the PDF directly on Google Drive
+        if (pdfUrl.includes('drive.google.com')) {
+          const fileIdMatch = pdfUrl.match(/id=([^&]+)/);
+          if (fileIdMatch && fileIdMatch[1]) {
+            const fileId = fileIdMatch[1];
+            toast({
+              title: "Alternative View Available",
+              description: "You can view this PDF directly on Google Drive",
+              action: (
+                <Button 
+                  variant="outline" 
+                  onClick={() => window.open(`https://drive.google.com/file/d/${fileId}/view`, '_blank')}
+                >
+                  Open in Drive
+                </Button>
+              )
+            });
+          }
+        }
       } finally {
         setLoading(false);
       }

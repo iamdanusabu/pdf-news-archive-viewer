@@ -20,29 +20,27 @@ interface HeaderProps {
   selectedPDFId: string | null;
 }
 
-// Updated with Google Drive PDF links
-// Note: These are public Google Drive PDF links with direct download format
+// PDF sources with Google Drive links
 const mockPDFs: PDFOption[] = [
   {
     id: "pdf1",
-    name: "Google Drive PDF 1",
+    name: "Sample Google Drive PDF",
     url: "https://drive.google.com/uc?export=download&id=1BqnJjgI5GdluiSXh7Ds8CDRRCz65biN5",
   },
   {
     id: "pdf2",
-    name: "Google Drive PDF 2",
+    name: "Another Google Drive PDF",
     url: "https://drive.google.com/uc?export=download&id=1pLHOdKD0-WM4kH-2KKpCkOIqcNk9YXg_",
   },
   {
     id: "pdf3",
-    name: "Sample PDF 3",
-    url: "https://www.orimi.com/pdf-test.pdf", // Kept one regular URL as fallback
+    name: "Regular Web PDF (Fallback)",
+    url: "https://www.orimi.com/pdf-test.pdf", // Regular URL as fallback
   },
-  // Add your own Google Drive PDF here
   {
     id: "pdf4",
-    name: "My PDF Document", // Change this to your PDF name
-    url: "https://drive.google.com/uc?export=download&id=1Lo_Ce9bGRlCE3yAbLsXEUG_MUpY9wvh9", // Replaced with your actual file ID
+    name: "My Custom PDF Document",
+    url: "https://drive.google.com/uc?export=download&id=1Lo_Ce9bGRlCE3yAbLsXEUG_MUpY9wvh9",
   },
 ];
 
