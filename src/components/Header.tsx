@@ -38,6 +38,12 @@ const mockPDFs: PDFOption[] = [
     name: "Sample PDF 3",
     url: "https://www.orimi.com/pdf-test.pdf", // Kept one regular URL as fallback
   },
+  // Add your own Google Drive PDF here
+  {
+    id: "pdf4",
+    name: "My PDF Document", // Change this to your PDF name
+    url: "https://drive.google.com/uc?export=download&id=YOUR_FILE_ID_HERE", // Replace YOUR_FILE_ID_HERE with your actual file ID
+  },
 ];
 
 export const Header = ({ onSelectPDF, selectedPDFId }: HeaderProps) => {
